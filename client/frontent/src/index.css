@@ -1,0 +1,66 @@
+@import "tailwindcss";
+:root {
+  /* Institute Brand Colors */
+  --brand-primary: #1e293b; /* Slate 800 */
+  --brand-accent: #2563eb;  /* Blue 600 */
+  --bg-main: #f8f9fa;       /* Light Gray */
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-main);
+  color: #1e293b;
+}
+
+/* --- CUSTOM UI SCROLLBAR --- */
+/* Makes the Meeting List and Sidebar look cleaner */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1; /* Slate 300 */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8; /* Slate 400 */
+}
+
+/* --- WIREFRAME "BOXED" UTILITIES --- */
+@layer components {
+  /* This matches the specific italic headers in your drawing */
+  .wireframe-header {
+    @apply p-3 bg-slate-50 border-b text-center italic font-bold text-slate-600 text-sm rounded-t-xl uppercase tracking-tighter;
+  }
+
+  /* Standard card style for the 3 columns */
+  .dashboard-card {
+    @apply bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden flex flex-col h-full transition-all duration-300;
+  }
+}
+
+/* --- ANIMATIONS --- */
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- DOCUMENT PREVIEW TEXTURE --- */
+/* Adds a subtle paper-like feel to the Scanned Document Preview area */
+.document-texture {
+  background-image: radial-gradient(#cbd5e1 0.5px, transparent 0.5px);
+  background-size: 10px 10px;
+}
