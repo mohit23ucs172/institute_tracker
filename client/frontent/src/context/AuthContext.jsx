@@ -36,29 +36,20 @@ export const AuthProvider = ({ children }) => {
     checkLoggedIn();
   }, []);
 
-  // 2. Login Function
-// 2. Updated Login Function
-  const login = async (email, password) => {
-    try {
-      const res = await axios.post(`${API_URL}/auth/login`, { email, password });
-      
-      // The backend returns { token, user: { name, role, ... } }
-      const { token, user: userData } = res.data;
+ const login = async (email, password) => {
+  try {
+    const res = await axios.post(`${API_URL}/auth/login`, { email, password });
+    
+    // Check if your backend sends { token, user } or just { token, name, role }
+    const { token, user: userData } = res.data; 
 
-      // 1. Save Token
-      localStorage.setItem('token', token);
-      
-      // 2. Store user info directly from the backend object
-      // This ensures all fields (name, role, assignedCommittees) are preserved
-      setUser(userData); 
-
-      return { success: true };
-    } catch (err) {
-      const message = err.response?.data?.message || "Login Failed";
-      return { success: false, message };
-    }
-  };
-
+    localStorage.setItem('token', token);
+    setUser(userData); // Ensure this matches your backend response structure
+    return { success: true };
+  } catch (err) {
+    return { success: false, message: err.response?.data?.message };
+  }
+};
   // 3. Logout Function
   const logout = () => {
     localStorage.removeItem('token');
