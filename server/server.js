@@ -15,6 +15,7 @@ app.use(cors({
   origin: ['http://localhost:5173', 'https://institute-tracker-r5ue.vercel.app'],
   credentials: true
 }));
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // 3. Import Routes

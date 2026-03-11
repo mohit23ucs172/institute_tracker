@@ -38,7 +38,10 @@ export const AuthProvider = ({ children }) => {
 
  const login = async (email, password) => {
   try {
-    const res = await axios.post(`${API_URL}/auth/login`, { email, password });
+ const res = await axios.post(`${API_URL}/auth/login`, 
+  { email, password }, // This is the JSON body
+  { headers: { 'Content-Type': 'application/json' } }
+);
     
     // Check if your backend sends { token, user } or just { token, name, role }
     const { token, user: userData } = res.data; 
