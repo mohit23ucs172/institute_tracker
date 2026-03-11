@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   // Set your Backend URL here
-  const API_URL = "http://localhost:5000/api";
+  const API_URL =process.env.VITE_API_URL || "http://localhost:5000/api";
 
   // 1. Check for existing token on load
   useEffect(() => {

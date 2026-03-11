@@ -12,7 +12,7 @@ const app = express();
 app.use(cors());
 // In server.js
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://your-frontend-domain.vercel.app'],
+  origin: ['http://localhost:5173', 'https://backendinstitutetra/'],
   credentials: true
 }));
 app.use(express.urlencoded({ extended: true }));
