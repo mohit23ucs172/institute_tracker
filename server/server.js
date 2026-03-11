@@ -10,7 +10,11 @@ const app = express();
 
 // 2. Middleware
 app.use(cors());
-app.use(express.json());
+// In server.js
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://your-frontend-domain.vercel.app'],
+  credentials: true
+}));
 app.use(express.urlencoded({ extended: true }));
 
 // 3. Import Routes
@@ -54,8 +58,16 @@ app.get('/', (req, res) => {
 });
 
 // 8. Start Server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`🔗 API Base URL: http://localhost:${PORT}/api`);
-});
+// ... all your routes and middleware above
+
+// VERCEL FIX: Check environment to decide how to run the app
+if (process.env.NODE_ENV !== 'production') {
+  // RUNS LOCALLY (e.g., nodemon server.js)
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Development server running on http://localhost:${PORT}`);
+  });
+}
+
+// EXPORT FOR VERCEL (Serverless Function)
+module.exports = app;
